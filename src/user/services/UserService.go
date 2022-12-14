@@ -14,8 +14,8 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-func AllTodo(requestFilter map[string]interface{}) ([]models.Todo, pagination.PaginationData) {
-	var users []models.Todo
+func AllUser(requestFilter map[string]interface{}) ([]models.User, pagination.PaginationData) {
+	var users []models.User
 
 	filter := bson.M{}
 
@@ -26,7 +26,7 @@ func AllTodo(requestFilter map[string]interface{}) ([]models.Todo, pagination.Pa
 	page, _ := strconv.ParseInt(requestFilter["page"].(string), 10, 64)
 	limit, _ := strconv.ParseInt(requestFilter["limit"].(string), 10, 64)
 
-	paginatedData, err := pagination.New(models.TodoCollection.Collection).
+	paginatedData, err := pagination.New(models.UserCollection.Collection).
 		Page(page).
 		Limit(limit).
 		Sort("createdAt", -1).
@@ -40,16 +40,16 @@ func AllTodo(requestFilter map[string]interface{}) ([]models.Todo, pagination.Pa
 	return users, paginatedData.Pagination
 }
 
-func CreateATodo(createTodoDto dto.CreateTodoRequest) models.Todo {
-	user := models.Todo{
+func CreateAUser(createUserDto dto.CreateUserRequest) models.User {
+	user := models.User{
 		Id:        primitive.NewObjectID(),
-		Task:      createTodoDto.Task,
-		Status:    createTodoDto.Status,
+		Task:      createUserDto.Task,
+		Status:    createUserDto.Status,
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
 	}
 
-	result, err := models.TodoCollection.InsertOne(user)
+	result, err := models.UserCollection.InsertOne(user)
 	if err != nil || result == nil {
 		panic(err)
 	}
@@ -57,7 +57,7 @@ func CreateATodo(createTodoDto dto.CreateTodoRequest) models.Todo {
 	return user
 }
 
-func UpdateATodo(userId string, updateTodoDto dto.UpdateTodoRequest) (models.Todo, error) {
+func UpdateAUser(userId string, updateUserDto dto.UpdateUserRequest) (models.User, error) {
 
 	objId, _ := primitive.ObjectIDFromHex(userId)
 
@@ -68,12 +68,12 @@ func UpdateATodo(userId string, updateTodoDto dto.UpdateTodoRequest) (models.Tod
 		Upsert:         &upsert,
 	}
 
-	result := models.TodoCollection.FindOneAndUpdate(
+	result := models.UserCollection.FindOneAndUpdate(
 		bson.M{"_id": objId},
 		bson.D{
 			{"$set", bson.M{
-				"task":      updateTodoDto.Task,
-				"status":    updateTodoDto.Status,
+				"task":      updateUserDto.Task,
+				"status":    updateUserDto.Status,
 				"updatedAt": time.Now(),
 			}},
 		},
@@ -82,23 +82,23 @@ func UpdateATodo(userId string, updateTodoDto dto.UpdateTodoRequest) (models.Tod
 
 	if result.Err() != nil {
 		log.Println("Err ", result.Err())
-		return models.Todo{}, result.Err()
+		return models.User{}, result.Err()
 	}
 
-	var user models.Todo
+	var user models.User
 	if err := result.Decode(&user); err != nil {
-		return models.Todo{}, err
+		return models.User{}, err
 	}
 
 	return user, nil
 }
 
-func ATodo(userId string) models.Todo {
-	var user models.Todo
+func AUser(userId string) models.User {
+	var user models.User
 
 	objId, _ := primitive.ObjectIDFromHex(userId)
 
-	err := models.TodoCollection.FindOne(bson.M{"_id": objId}).Decode(&user)
+	err := models.UserCollection.FindOne(bson.M{"_id": objId}).Decode(&user)
 
 	if err != nil {
 		fmt.Println(err)
@@ -108,10 +108,10 @@ func ATodo(userId string) models.Todo {
 	return user
 }
 
-func DeleteATodo(userId string) bool {
+func DeleteAUser(userId string) bool {
 	objId, _ := primitive.ObjectIDFromHex(userId)
 
-	result := models.TodoCollection.FindOneAndDelete(bson.D{{"_id", objId}})
+	result := models.UserCollection.FindOneAndDelete(bson.D{{"_id", objId}})
 
 	if result.Err() != nil {
 		return false

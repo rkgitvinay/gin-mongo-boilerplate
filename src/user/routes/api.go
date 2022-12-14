@@ -6,11 +6,11 @@ import (
 	. "github.com/shipu/artifact"
 )
 
-func TodoSetup() {
+func UserSetup() {
 	v1 := Router.Group("api/v1")
-	v1.GET("users", c.TodoIndex())
-	v1.POST("users", c.TodoCreate())
-	v1.GET("users/:userId", c.TodoShow())
-	v1.PUT("users/:userId", c.TodoUpdate())
-	v1.DELETE("users/:userId", c.TodoDelete())
+	v1.GET("users", c.UserIndex())
+	v1.POST("users", c.UserCreate())
+	v1.GET("users/:userId", c.UserShow())
+	v1.PUT("users/:userId", c.UserUpdate())
+	v1.DELETE("users/:userId", c.UserDelete())
 }

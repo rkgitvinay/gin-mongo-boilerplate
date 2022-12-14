@@ -1,6 +1,6 @@
 basePath: /api/v1
 definitions:
-  dto.CreateTodoRequest:
+  dto.CreateUserRequest:
     properties:
       status:
         description: 'required: true'
@@ -17,7 +17,7 @@ definitions:
     - status
     - task
     type: object
-  dto.UpdateTodoRequest:
+  dto.UpdateUserRequest:
     properties:
       status:
         description: 'required: true'
@@ -67,18 +67,18 @@ paths:
           description: ""
       summary: all users
       tags:
-      - Todo
+      - User
     post:
       consumes:
       - application/json
       description: create a user
       parameters:
-      - description: Create Todo Request
+      - description: Create User Request
         in: body
         name: request
         required: true
         schema:
-          $ref: '#/definitions/dto.CreateTodoRequest'
+          $ref: '#/definitions/dto.CreateUserRequest'
       produces:
       - application/json
       responses:
@@ -88,14 +88,14 @@ paths:
           description: ""
       summary: create a user
       tags:
-      - Todo
+      - User
   /users/{userId}:
     delete:
       consumes:
       - application/json
       description: delete a user
       parameters:
-      - description: Todo ID
+      - description: User ID
         in: path
         name: userId
         required: true
@@ -109,13 +109,13 @@ paths:
           description: ""
       summary: delete a user
       tags:
-      - Todo
+      - User
     get:
       consumes:
       - application/json
-      description: Todo Details
+      description: User Details
       parameters:
-      - description: Todo ID
+      - description: User ID
         in: path
         name: userId
         required: true
@@ -129,23 +129,23 @@ paths:
           description: ""
       summary: user details
       tags:
-      - Todo
+      - User
     put:
       consumes:
       - application/json
       description: update a user
       parameters:
-      - description: Todo ID
+      - description: User ID
         in: path
         name: userId
         required: true
         type: string
-      - description: Update Todo Request
+      - description: Update User Request
         in: body
         name: request
         required: true
         schema:
-          $ref: '#/definitions/dto.UpdateTodoRequest'
+          $ref: '#/definitions/dto.UpdateUserRequest'
       produces:
       - application/json
       responses:
@@ -155,5 +155,5 @@ paths:
           description: ""
       summary: update a user
       tags:
-      - Todo
+      - User
 swagger: "2.0"

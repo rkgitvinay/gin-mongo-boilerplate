@@ -7,9 +7,9 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-var TodoCollection artifact.MongoCollection
+var UserCollection artifact.MongoCollection
 
-type Todo struct {
+type User struct {
 	Id        primitive.ObjectID `json:"id,omitempty" bson:"_id"`
 	Task      string             `json:"task" bson:"task"`
 	Status    string             `json:"status" bson:"status"`
@@ -17,6 +17,6 @@ type Todo struct {
 	UpdatedAt time.Time          `json:"updatedAt,omitempty" bson:"updatedAt"`
 }
 
-func TodoSetup() {
-	TodoCollection = artifact.Mongo.Collection("users")
+func UserSetup() {
+	UserCollection = artifact.Mongo.Collection("users")
 }

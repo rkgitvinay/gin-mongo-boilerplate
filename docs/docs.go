@@ -26,7 +26,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Todo"
+                    "User"
                 ],
                 "summary": "all users",
                 "parameters": [
@@ -67,17 +67,17 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Todo"
+                    "User"
                 ],
                 "summary": "create a user",
                 "parameters": [
                     {
-                        "description": "Create Todo Request",
+                        "description": "Create User Request",
                         "name": "request",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/dto.CreateTodoRequest"
+                            "$ref": "#/definitions/dto.CreateUserRequest"
                         }
                     }
                 ],
@@ -93,7 +93,7 @@ const docTemplate = `{
         },
         "/users/{userId}": {
             "get": {
-                "description": "Todo Details",
+                "description": "User Details",
                 "consumes": [
                     "application/json"
                 ],
@@ -101,13 +101,13 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Todo"
+                    "User"
                 ],
                 "summary": "user details",
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Todo ID",
+                        "description": "User ID",
                         "name": "userId",
                         "in": "path",
                         "required": true
@@ -131,24 +131,24 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Todo"
+                    "User"
                 ],
                 "summary": "update a user",
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Todo ID",
+                        "description": "User ID",
                         "name": "userId",
                         "in": "path",
                         "required": true
                     },
                     {
-                        "description": "Update Todo Request",
+                        "description": "Update User Request",
                         "name": "request",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/dto.UpdateTodoRequest"
+                            "$ref": "#/definitions/dto.UpdateUserRequest"
                         }
                     }
                 ],
@@ -170,13 +170,13 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Todo"
+                    "User"
                 ],
                 "summary": "delete a user",
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Todo ID",
+                        "description": "User ID",
                         "name": "userId",
                         "in": "path",
                         "required": true
@@ -194,7 +194,7 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "dto.CreateTodoRequest": {
+        "dto.CreateUserRequest": {
             "type": "object",
             "required": [
                 "status",
@@ -217,7 +217,7 @@ const docTemplate = `{
                 }
             }
         },
-        "dto.UpdateTodoRequest": {
+        "dto.UpdateUserRequest": {
             "type": "object",
             "required": [
                 "status",

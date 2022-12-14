@@ -14,5 +14,5 @@ func Register() {
 }
 
 func Boot() {
-	user.TodoSetup()
+	user.UserSetup()
 }

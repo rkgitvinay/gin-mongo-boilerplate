@@ -18,7 +18,7 @@ func Register() {
 	BaseRoute()
 	SwaggerRoute()
 
-	userRoute.TodoSetup()
+	userRoute.UserSetup()
 }
 
 func BaseRoute() {
