@@ -29,7 +29,7 @@ func AllTodo(requestFilter map[string]interface{}) ([]models.Todo, pagination.Pa
 	paginatedData, err := pagination.New(models.TodoCollection.Collection).
 		Page(page).
 		Limit(limit).
-		Sort("created_at", -1).
+		Sort("createdAt", -1).
 		Decode(&users).
 		Filter(filter).
 		Find()
@@ -72,9 +72,9 @@ func UpdateATodo(userId string, updateTodoDto dto.UpdateTodoRequest) (models.Tod
 		bson.M{"_id": objId},
 		bson.D{
 			{"$set", bson.M{
-				"task":       updateTodoDto.Task,
-				"status":     updateTodoDto.Status,
-				"updated_at": time.Now(),
+				"task":      updateTodoDto.Task,
+				"status":    updateTodoDto.Status,
+				"updatedAt": time.Now(),
 			}},
 		},
 		&opt,
